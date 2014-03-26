@@ -7,7 +7,7 @@ end
 # Letters should be lowercase before counting
 # For example, histogram('Hello') returns {'h'=>1,'e'=>1,'l'=>2,'o'=>1}
 def histogram(a_string)
-	str = a_string.split("")
+	str = a_string.scan(/\w/)
 	strc = str.map { |x| str.count(x) }
 	return Hash[str.zip strc]
 end
@@ -18,7 +18,6 @@ end
 # (Hint: the is_a? method might be useful here)
 # 
 def sum_only_numbers(an_array)
-	
 	ct = 0
 	an_array.each { |x| ct += x if x.is_a? Numeric }
 	return ct
@@ -32,11 +31,23 @@ end
 # Otherwise, the element is simply the value of i
 # For example [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', ..., 14, 'FizzBuzz', ...]
 def fizzbuzz
+	arr = []
+	for i in (1..100)
+		if ((i % 3 == 0) && (i % 5 == 0))
+			arr.push("FizzBuzz")
+		elsif(i % 3 == 0)
+			arr.push("Fizz")
+		elsif(i % 5 == 0)
+			arr.push("Buzz")
+		else
+			arr.push(i)
+		end
+	end
+	return arr
 end
 
 # Uncomment each of these to test your functions
  puts reverse([3,6,'dog']).inspect
  puts histogram('The Quick brown fox').inspect
  puts sum_only_numbers [4, 'foo', [ ], 27, :rain, 3.14]
-# puts fizzbuzz.join("\n")
-
+ puts fizzbuzz.join("\n")
